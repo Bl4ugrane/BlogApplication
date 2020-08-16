@@ -6,8 +6,10 @@
         <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Username</th>
-            <th scope="col">Roles</th>
+            <th scope="col">Логин</th>
+            <th scope="col">Роль</th>
+            <th scope="col">Редактировать</th>
+            <th scope="col">Удалить</th>
         </tr>
         </thead>
         <tbody>

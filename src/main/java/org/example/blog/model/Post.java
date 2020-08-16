@@ -3,6 +3,8 @@ package org.example.blog.model;
 
 import javax.persistence.*;
 
+
+
 @Entity
 public class Post {
 
@@ -29,7 +31,7 @@ public class Post {
     }
 
     public String getAuthorName() {
-        return author != null ? author.getUsername() : "<none>";
+        return author != null ? author.getUsername() : "";
     }
 
     public Long getId() {
