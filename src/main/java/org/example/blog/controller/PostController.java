@@ -17,48 +17,41 @@ import java.util.UUID;
 
 
 
-
-
 @Controller
 @RequestMapping("/posts")
 public class PostController {
 
     @Autowired
-    private final PostRepository postRepository;
+    private final PostService postService;
 
     @Autowired
-    private final PostService postService;
+    private final PostRepository postRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    public PostController(PostRepository postRepository, PostService postService) {
-        this.postRepository = postRepository;
+    public PostController(PostRepository postRepository, PostService postService, PostRepository postRepository1) {
         this.postService = postService;
+        this.postRepository = postRepository1;
     }
-
-
 
     @GetMapping
     public String main(@RequestParam(required = false,defaultValue = "") String title, Model model) {
         Iterable<Post> posts;
 
         if (title != null && !title.isEmpty()) {
-            posts = postRepository.findByTitle(title);
+            posts = postService.findByTitle(title);
         } else {
-            posts = postRepository.findAll();
+            posts = postService.findAll();
         }
 
         model.addAttribute("posts", posts);
         model.addAttribute("title", title);
-
         return "postList";
     }
 
-
     @GetMapping("/add")
     public String post() {
-
         return "postAdd";
     }
 
@@ -82,13 +75,17 @@ public class PostController {
             file.transferTo(new File(uploadPath + "/" + resultFilename));
         }
 
-        postRepository.save(post);
-
+        postService.savePost(post);
         return "redirect:/posts";
     }
 
-    @GetMapping("{post}")
-    public String postViewPage(@PathVariable Post post, Model model) {
+    @GetMapping("{id}")
+    public String postViewPage(@PathVariable("id") Long id, Model model) {
+
+        if(!postService.existsById(id)) {
+            return "redirect:/posts";
+        }
+        Post post = postService.findById(id);
         model.addAttribute("post", post);
         return "post";
     }
@@ -97,28 +94,25 @@ public class PostController {
     @GetMapping("/edit/{id}")
     public String postEditPage(@PathVariable("id") Long id, Model model) {
 
-        if(!postRepository.existsById(id)) {
+        if(!postService.existsById(id)) {
             return "redirect:/posts";
         }
         Post post = postService.findById(id);
         model.addAttribute("post", post);
-
-        return "postEdit";
+         return "postEdit";
     }
+
 
     @PostMapping("/edit/{post}")
     public String postEdit(Post post) {
-
         postService.savePost(post);
-
         return "redirect:/posts";
     }
 
+
     @PostMapping("/remove/{id}")
     public String postDelete(@PathVariable("id") Long id) {
-
         postService.deleteById(id);
-
         return "redirect:/posts";
     }
 

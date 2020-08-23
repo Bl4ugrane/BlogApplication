@@ -9,14 +9,11 @@ import java.util.List;
 
 
 
-
-
 @Service
 public class PostService {
 
     @Autowired
     private final PostRepository postRepository;
-
 
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
@@ -25,6 +22,14 @@ public class PostService {
     public Post findById(Long id){
         return postRepository.getOne(id);
     }
+
+    public List<Post> findByTitle(String title) {
+        return postRepository.findByTitle(title);
+    }
+
+     public boolean existsById(Long id) {
+        return postRepository.existsById(id);
+     }
 
     public List<Post> findAll(){
         return postRepository.findAll();

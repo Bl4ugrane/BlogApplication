@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<Post> findByTitle(String title);
+     boolean existsById(Long id);
+
+     List<Post> findByTitle(String title);
+
 }

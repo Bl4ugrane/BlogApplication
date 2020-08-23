@@ -1,15 +1,13 @@
 package org.example.blog.controller;
 
 
-import org.example.blog.model.Role;
 import org.example.blog.model.User;
-import org.example.blog.repository.UserRepository;
+import org.example.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import java.util.Collections;
 
 
 
@@ -18,12 +16,11 @@ import java.util.Collections;
 public class RegistrationController {
 
     @Autowired
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public RegistrationController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
     }
-
 
     @GetMapping("/registration")
     public String registration() {
@@ -33,15 +30,11 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
-           User userFromDB = userRepository.findByUsername(user.getUsername());
 
-           if (userFromDB != null) {
-               model.addAttribute("message","User exists");
+           if (!userService.addUser(user)) {
+               model.addAttribute("message","Такой пользователь уже существует");
                return "registration";
            }
-           user.setActive(true);
-           user.setRoles(Collections.singleton(Role.USER));
-           userRepository.save(user);
 
         return "redirect:/login";
     }

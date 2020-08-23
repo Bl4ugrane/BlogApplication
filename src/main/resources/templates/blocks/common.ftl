@@ -7,32 +7,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <style>
-            body {
+            body{
                 background-image: url("../../static/background.jpg");
                 background-size: cover;
                 color: white;
             }
-            a {
+
+            a{
                 color: gray;
             }
-            h1 {
+
+            h1{
                 font-size: 2.5rem;
                 margin-bottom: .5rem;
                 font-weight: 500;
                 line-height: 1.2;
             }
 
-            footer {
+            footer{
                 padding: 2.5rem 0;
                 text-align: center;
                 border-top: .05rem solid;
                 color: black;
             }
-
-
-
-
-
         </style>
     </head>
     <body>
