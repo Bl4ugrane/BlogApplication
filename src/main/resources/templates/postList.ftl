@@ -1,5 +1,5 @@
 <#import "blocks/common.ftl" as c>
-
+<#import "blocks/pager.ftl" as p>
 <@c.page>
     <main role="main" class="container">
         <div class="container ml-5 mb-4">
@@ -12,9 +12,10 @@
                 </div>
             </div>
         </div>
+        <@p.pager url page/>
         <div class="card-deck">
             <div class="col-md-8">
-                <#list posts as post>
+                <#list page.content as post>
                     <div class="card flex-md-row mb-4 box-shadow h-md-250">
                         <div class="card-body d-flex flex-column align-items-start">
                             <strong class="d-inline-block mb-2 text-primary">World</strong>
@@ -64,6 +65,7 @@
                     </ol>
                 </div>
             </aside>
+            <@p.pager url page/>
         </div>
     </main>
 </@c.page>

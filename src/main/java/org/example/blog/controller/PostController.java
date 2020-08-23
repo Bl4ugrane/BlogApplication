@@ -6,11 +6,15 @@ import org.example.blog.repository.PostRepository;
 import org.example.blog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -36,16 +40,19 @@ public class PostController {
     }
 
     @GetMapping
-    public String main(@RequestParam(required = false,defaultValue = "") String title, Model model) {
-        Iterable<Post> posts;
+    public String main(@RequestParam(required = false,defaultValue = "") String title,
+                       @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable,
+                       Model model) {
+        Page<Post> page;
 
         if (title != null && !title.isEmpty()) {
-            posts = postService.findByTitle(title);
+            page = postService.findByTitle(title,pageable);
         } else {
-            posts = postService.findAll();
+            page = postService.findAll(pageable);
         }
 
-        model.addAttribute("posts", posts);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/posts");
         model.addAttribute("title", title);
         return "postList";
     }

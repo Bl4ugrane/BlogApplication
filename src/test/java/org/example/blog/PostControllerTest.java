@@ -39,7 +39,7 @@ public class PostControllerTest {
         this.mockMvc.perform(get("/posts"))
                 .andDo(print())
                 .andExpect(authenticated())
-                .andExpect(xpath("//div[@class='col-md-8']/div").nodeCount(3));
+                .andExpect(xpath("//div[@class='col-md-8']/div").nodeCount(4));
 
     }
 

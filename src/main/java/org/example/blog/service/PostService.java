@@ -4,8 +4,9 @@ package org.example.blog.service;
 import org.example.blog.model.Post;
 import org.example.blog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 
 
@@ -23,16 +24,16 @@ public class PostService {
         return postRepository.getOne(id);
     }
 
-    public List<Post> findByTitle(String title) {
-        return postRepository.findByTitle(title);
+    public Page<Post> findByTitle(String title, Pageable pageable) {
+        return postRepository.findByTitle(title,pageable);
     }
 
      public boolean existsById(Long id) {
         return postRepository.existsById(id);
      }
 
-    public List<Post> findAll(){
-        return postRepository.findAll();
+    public Page<Post> findAll(Pageable pageable){
+        return postRepository.findAll(pageable);
     }
 
     public Post savePost(Post user){
