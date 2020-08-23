@@ -6,7 +6,7 @@
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-12 d-flex justify-content-end align-items-center">
                     <form method="get" action="/posts" class="form-inline">
-                        <input type="text" name="title" class="form-control" value="${title?ifExists}" placeholder="Поиск...">
+                        <input type="text" name="title" class="form-control" value="${title?ifExists}" placeholder="Поиск..."/>
                         <button type="submit" class="btn btn-secondary ml-2">Найти</button>
                     </form>
                 </div>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="mt-4 mr-4">
                             <#if post.filename??>
-                                <img src="/img/${post.filename}" class="card-img-top" style="width:210px;height:200px;">
+                                <img src="/img/${post.filename}" class="card-img-top" style="width:210px;height:200px;"></img>
                             </#if>
                         </div>
                     </div>

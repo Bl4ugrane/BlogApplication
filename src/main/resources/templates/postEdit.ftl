@@ -6,7 +6,7 @@
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-12 d-flex justify-content-end align-items-center">
                     <form method="get" action="/posts" class="form-inline">
-                        <input type="text" name="title" class="form-control" value="${title?ifExists}" placeholder="Поиск...">
+                        <input type="text" name="title" class="form-control" value="${title?ifExists}" placeholder="Поиск..."/>
                         <button type="submit" class="btn btn-secondary ml-2">Найти</button>
                     </form>
                 </div>
@@ -19,13 +19,13 @@
                         <div class="form-group">
                             <div class="col-8 mt-8">
                                 <label for="exampleInputTitle">Заголовок</label>
-                                <input type="text" class="form-control" name="title" value="${post.title}">
+                                <input type="text" class="form-control" name="title" value="${post.title}"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-8 mt-8">
                                 <label for="exampleInputDescription">Описание</label>
-                                <input type="text" class="form-control" name="description" value="${post.description}">
+                                <input type="text" class="form-control" name="description" value="${post.description}"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <div class="col-8 mt-8">
                                 <label for="exampleInputFile">UploadFile</label>
-                                <input type="file" class="form-control" name="file">
+                                <input type="file" class="form-control" name="file"/>
                             </div>
                         </div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -51,7 +51,7 @@
                 <div class="row justify-content-center">
                     <div class="col-5 mt-2 mb-2">
                         <form method="post" action="/posts/remove/${post.id}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-lg btn-dark btn-block">Удалить</button>
                         </form>
                     </div>

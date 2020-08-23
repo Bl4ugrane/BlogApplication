@@ -6,13 +6,13 @@
             <div class="form-group">
                 <div class="col-5 mt-8">
                     <label for="exampleInputTitle">Заголовок</label>
-                    <input type="text" class="form-control" name="title" placeholder="Введите заголовок статьи">
+                    <input type="text" class="form-control" name="title" placeholder="Введите заголовок статьи"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-5 mt-8">
                     <label for="exampleInputDescription">Описание</label>
-                    <input type="text" class="form-control" name="description" placeholder="Введите описание статьи">
+                    <input type="text" class="form-control" name="description" placeholder="Введите описание статьи"/>
                 </div>
             </div>
             <div class="form-group">
