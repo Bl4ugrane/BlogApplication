@@ -1,12 +1,12 @@
 <#import "blocks/common.ftl" as c>
-
+<#include "blocks/security.ftl">
 <@c.page>
     <main role="main" class="container">
         <div class="container ml-5 mb-4">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-12 d-flex justify-content-end align-items-center">
                     <form method="get" action="/posts" class="form-inline">
-                        <input type="text" name="title" class="form-control" value="${title?ifExists}" placeholder="Поиск...">
+                        <input type="text" name="title" class="form-control" value="${title?ifExists}" placeholder="Поиск..."/>
                         <button type="submit" class="btn btn-secondary ml-2">Найти</button>
                     </form>
                 </div>
@@ -18,20 +18,20 @@
                     <div class="row justify-content-center">
                         <div class="col-8 mt-8">
                             <#if post.filename??>
-                                <img src="/img/${post.filename}" class="card-img-top" style="width:150px;height:147px;">
+                                <img src="/img/${post.filename}" class="card-img-top" style="width:150px;height:147px;"/>
                             </#if>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-8 mt-8">
                             <label for="exampleInputTitle">Заголовок</label>
-                            <input disabled="disabled" type="text" class="form-control" name="title" value="${post.title}">
+                            <input disabled="disabled" type="text" class="form-control" name="title" value="${post.title}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-8 mt-8">
                             <label for="exampleInputDescription">Описание</label>
-                            <input disabled="disabled" type="text" class="form-control" name="description" value="${post.description}">
+                            <input disabled="disabled" type="text" class="form-control" name="description" value="${post.description}"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -41,11 +41,13 @@
                         </div>
                     </div>
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <#if isAdmin>
                     <div class="row justify-content-left">
                         <div class="col-6 mt-3 mb-2 ml-5">
                             <a class="btn btn-lg btn-dark btn-block" href="/posts/edit/${post.id}">Редактировать</a>
                         </div>
                     </div>
+                    </#if>
                 </form>
             </div>
             <aside class="col-md-4 blog-sidebar">

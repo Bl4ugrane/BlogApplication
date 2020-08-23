@@ -8,6 +8,6 @@ known = Session.SPRING_SECURITY_CONTEXT??>
     isAdmin = user.isAdmin()>
 <#else>
     <#assign
-    name = "unknown"
+    name = ""
     isAdmin = false>
 </#if>
