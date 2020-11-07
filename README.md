@@ -3,4 +3,4 @@
 - Hibernate
 - Maven
 - HTML/CSS (Bootstrap)
-- Freemarker
+- FreeMarker
