@@ -1,0 +1,5 @@
+- Spring (MVC, Security, JPA)
+- MySQL
+- Hibernate
+- Maven
+- HTML/CSS (Bootstrap)
