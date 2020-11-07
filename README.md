@@ -1,5 +1,6 @@
-- Spring (MVC, Security, JPA)
+- Spring Boot
 - MySQL
 - Hibernate
 - Maven
 - HTML/CSS (Bootstrap)
+- Freemarker
