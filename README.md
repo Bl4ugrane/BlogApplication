@@ -1,6 +1,5 @@
 - Spring Boot
 - MySQL
-- Hibernate
 - Maven
 - HTML/CSS (Bootstrap)
 - FreeMarker
