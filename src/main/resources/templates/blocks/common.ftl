@@ -30,6 +30,7 @@
                 border-top: .05rem solid;
                 color: black;
             }
+
         </style>
     </head>
     <body>

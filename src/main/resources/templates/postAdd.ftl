@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <div class="col-5 mt-8">
-                    <label for="exampleInputFile">UploadFile</label>
+                    <label for="exampleInputFile">Загрузить изображение</label>
                     <input type="file" class="form-control" name="file">
                 </div>
             </div>

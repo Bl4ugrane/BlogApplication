@@ -2,7 +2,6 @@ package org.example.blog.controller;
 
 import org.example.blog.model.Post;
 import org.example.blog.model.User;
-import org.example.blog.repository.PostRepository;
 import org.example.blog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,22 +20,18 @@ import java.util.UUID;
 @RequestMapping("/posts")
 public class PostController {
 
-    @Autowired
     private final PostService postService;
-
-    @Autowired
-    private final PostRepository postRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    public PostController(PostRepository postRepository, PostService postService, PostRepository postRepository1) {
+    @Autowired
+    public PostController(PostService postService) {
         this.postService = postService;
-        this.postRepository = postRepository1;
     }
 
     @GetMapping
-    public String main(@RequestParam(required = false,defaultValue = "") String title, Model model) {
+    public String main(@RequestParam(required = false, defaultValue = "") String title, Model model) {
         Iterable<Post> posts;
 
         if (title != null && !title.isEmpty()) {
@@ -59,8 +54,7 @@ public class PostController {
     public String post(@AuthenticationPrincipal User user,
                        @RequestParam String title, @RequestParam String description,
                        @RequestParam  String text,
-                       @RequestParam("file") MultipartFile file,
-                       Model model ) throws IOException {
+                       @RequestParam("file") MultipartFile file) throws IOException {
 
         Post post = new Post(title,description, text,user);
         if (file != null && !file.getOriginalFilename().isEmpty()) {
@@ -97,6 +91,7 @@ public class PostController {
         if(!postService.existsById(id)) {
             return "redirect:/posts";
         }
+
         Post post = postService.findById(id);
         model.addAttribute("post", post);
          return "postEdit";

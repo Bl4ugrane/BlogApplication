@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
     private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -38,25 +38,24 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/edit/{user}")
     public String userEditPage(@PathVariable User user, Model model){
-        model.addAttribute("user",user);
         model.addAttribute("roles", Role.values());
         return "userEdit";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/edit/{user}")
-    public String userEdit(@RequestParam String username,
-                            @RequestParam Map<String, String> form,
+    @PostMapping("/edit/{id}")
+    public String userEdit(@RequestParam(value = "username", required = false) String username,
+                           @RequestParam(value = "email", required = false) String email,
+                           @RequestParam Map<String, String> form,
                             @PathVariable( value = "id") long id) {
 
         User user = userService.findById(id);
+        user.setEmail(email);
         user.setUsername(username);
 
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());
-
-        user.getRoles().clear();
 
         for (String key : form.keySet()) {
             if (roles.contains(key)) {
@@ -64,11 +63,12 @@ public class UserController {
             }
         }
         userService.saveUser(user);
+
         return "redirect:/users";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping
+    @PostMapping("/remove/{id}")
     public String userDelete(@PathVariable("id") Long id, Model model) {
         userService.deleteById(id);
         Iterable<User> users = userService.findAll();

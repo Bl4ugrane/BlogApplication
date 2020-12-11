@@ -37,7 +37,7 @@
                     </div>
                 </#list>
             </div>
-            <aside class="col-md-4 blog-sidebar">
+            <aside class="col-md-4 pl-5 blog-sidebar">
                 <div class="p-3 ml-5">
                     <h4 class="font-italic">Archives</h4>
                     <ol class="list-unstyled mb-0">

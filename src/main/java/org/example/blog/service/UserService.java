@@ -18,9 +18,10 @@ import java.util.List;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
+
     private final UserRepository userRepository;
 
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

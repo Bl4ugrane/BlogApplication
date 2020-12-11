@@ -1,7 +1,7 @@
 <#import "blocks/common.ftl" as c>
 
 <@c.page>
-    <form action="/users" method="post">
+    <form method="post">
         <div class="container" align="left">
             <div class="form-group">
                 <div class="col-5 mt-8">
@@ -15,18 +15,21 @@
                     <input type="text" class="form-control" name="email" value="${user.email}"/>
                 </div>
             </div>
-            <#list roles as role>
-            <div class="form-group">
-                <div class="col-5 mt-8">
-                    <label for="exampleInputRoles">
-                    <input type="checkbox" class="form-control" name="${role}"
-                            ${user.roles?seq_contains(role)?string("checked","")}/>
-                    ${role}</label>
-                </div>
-            </#list>
             </div>
-                   <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                   <button type="submit" class="btn btn-secondary">Изменить</button>
+        </div>
+        <div class="form-group">
+            <div class="col-5 mt-8">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-secondary">Изменить</button>
+            </div>
         </div>
     </form>
+    <div class="form-group">
+        <div class="col-5 mt-8">
+            <form method="post" action="/users/remove/${user.id}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <button class="btn btn-secondary">Удалить</button>
+            </form>
+        </div>
+    </div>
 </@c.page>
