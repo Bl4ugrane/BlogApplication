@@ -1,6 +1,7 @@
 package org.example.blog;
 
 
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,52 +19,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @WithUserDetails("admin")
-public class PostControllerTest {
+public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void postListTest() throws Exception {
-        this.mockMvc.perform(get("/posts"))
+    public void usersPageTest() throws Exception {
+        this.mockMvc.perform(get("/users"))
                 .andDo(print())
                         .andExpect(authenticated())
-                .andExpect(xpath("//div[@class='col-md-8']/div").nodeCount(3));
+                .andExpect(xpath("//table/tbody/tr").nodeCount(2))
+                        .andExpect(content().string(containsString("Редактировать")))
+                .andExpect(content().string(containsString("Логин")))
+                        .andExpect(content().string(containsString("Эл. почта")))
+                .andExpect(content().string(containsString("Роль")));
+    }
+
+    @Test
+    public void roleTest() throws Exception {
+        this.mockMvc.perform(get("/users"))
+                .andDo(print())
+                        .andExpect(authenticated())
+                .andExpect(xpath("//table/tbody/tr[1]/td[1]").string("admin"))
+                        .andExpect(content().string(containsString("ADMIN")));
 
     }
 
     @Test
-    public void postSearchTest() throws Exception {
-        this.mockMvc.perform(get("/posts").param("title","Getting Started"))
+    public void pageUserEditTest() throws Exception {
+        this.mockMvc.perform(get("/users/edit/1"))
                 .andDo(print())
                         .andExpect(authenticated())
-                .andExpect(xpath("//div[@class='col-md-8']/div").nodeCount(1));
+                .andExpect(content().string(containsString("admin")))
+                        .andExpect(content().string(containsString("admin@gmail.com")))
+                .andExpect(content().string(containsString("Изменить")))
+                        .andExpect(content().string(containsString("Удалить")));
 
     }
 
-    @Test
-    public void pagePostViewTest() throws Exception {
-        this.mockMvc.perform(get("/posts/13"))
-                .andDo(print())
-                      .andExpect(authenticated())
-                .andExpect(content().string(containsString("Getting Started")))
-                      .andExpect(content().string(containsString("Редактировать")));
 
-    }
-
-    @Test
-    public void pagePostEditTest() throws Exception {
-        this.mockMvc.perform(get("/posts/edit/13"))
-                .andDo(print())
-                        .andExpect(authenticated())
-                .andExpect(content().string(containsString("Getting Started")))
-                        .andExpect(content().string(containsString("Изменить")))
-                .andExpect(content().string(containsString("Удалить")));
-
-    }
 }

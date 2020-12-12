@@ -18,7 +18,7 @@
                 <td>${user.username}</td>
                 <td>${user.email?ifExists}</td>
                 <td><#list user.roles as role>${role}<#sep>,  </#list></td>
-                <td><a href="/users/edit/${user.id}">Изменить</a></td>
+                <td><a style="color: white" href="/users/edit/${user.id}">Изменить</a></td>
             </tr>
         <#else>
             <h2 align="center">Нет ни одного пользователя</h2>

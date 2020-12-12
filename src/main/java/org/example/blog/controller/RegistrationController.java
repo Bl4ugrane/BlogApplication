@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 
-
 @Controller
 public class RegistrationController {
 
@@ -31,12 +30,11 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
 
-           if (!userService.addUser(user)) {
-               model.addAttribute("message","Такой пользователь уже существует");
-               return "registration";
-           }
+        if (!userService.addUser(user)) {
+            model.addAttribute("message", "Такой пользователь уже существует");
+            return "registration";
+        }
 
         return "redirect:/login";
     }
-
 }

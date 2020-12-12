@@ -8,19 +8,20 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-3 mt-3 mb-2">
-                    <input type="text" name="username" class="form-control col" placeholder="Логин" />
+                    <input type="text" name="username" class="form-control" placeholder="Логин" />
                 </div>
             </div>
             <#if isRegisterForm>
                 <div class="row justify-content-center">
                     <div class="col-3 mt-3 mb-2">
-                        <input type="email" name="email" class="form-control" placeholder="test@gmail.com" />
+                        <input type="email" name="email" class="form-control"placeholder="test@gmail.com" />
                     </div>
                 </div>
             </#if>
             <div class="row justify-content-center">
                 <div class="col-3 mt-3 mb-2">
-                    <input type="password" name="password" class="form-control" placeholder="Пароль" />
+                    <input type="password" name="password" class="form-control"
+                           placeholder="Пароль" />
                 </div>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
