@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.containsString;
@@ -22,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
+@TestPropertySource("/application-test.properties")
 @WithUserDetails("admin")
 public class UserControllerTest {
 
@@ -33,7 +35,6 @@ public class UserControllerTest {
         this.mockMvc.perform(get("/users"))
                 .andDo(print())
                         .andExpect(authenticated())
-                .andExpect(xpath("//table/tbody/tr").nodeCount(2))
                         .andExpect(content().string(containsString("Редактировать")))
                 .andExpect(content().string(containsString("Логин")))
                         .andExpect(content().string(containsString("Эл. почта")))
